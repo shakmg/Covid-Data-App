@@ -25,6 +25,8 @@ export default class Home extends React.Component {
   };
 
   render() {
+    const { countries, globalSummary, errorMessage } = this.state;
+
     return (
       <div className={styles.container}>
         <Head>
@@ -35,40 +37,35 @@ export default class Home extends React.Component {
           <h1 className={styles.globalTitle}>Global Information Summary</h1>
           <div className={styles.date}>{todaysDate}</div>
         </div>
-        {this.state.errorMessage && (
-          <h3>There has been the following error: {this.state.errorMessage}</h3>
+        {errorMessage && (
+          <h3>There has been the following error: {errorMessage}</h3>
         )}
         <div className={styles.globalSummaryWrapper}>
           <ul className={styles.globalBulletPoints}>
-            <li>
-              New Confirmed Cases Today -{' '}
-              {this.state.globalSummary.NewConfirmed}
-            </li>
-            <li>
-              Total Confirmed Cases - {this.state.globalSummary.TotalConfirmed}
-            </li>
+            <li>New Confirmed Cases Today - {globalSummary.NewConfirmed}</li>
+            <li>Total Confirmed Cases - {globalSummary.TotalConfirmed}</li>
             <li>
               New Deaths Today -
               <span className={styles.warningInformation}>
-                {this.state.globalSummary.NewDeaths}
+                {globalSummary.NewDeaths}
               </span>
             </li>
             <li>
               Total Deaths -
               <span className={styles.warningInformation}>
-                {this.state.globalSummary.TotalDeaths}
+                {globalSummary.TotalDeaths}
               </span>
             </li>
             <li>
               New Recovered Today -
               <span className={styles.positiveInformation}>
-                {this.state.globalSummary.NewRecovered}
+                {globalSummary.NewRecovered}
               </span>
             </li>
             <li>
               Total Recovered -
               <span className={styles.positiveInformation}>
-                {this.state.globalSummary.TotalRecovered}
+                {globalSummary.TotalRecovered}
               </span>
             </li>
           </ul>
@@ -77,7 +74,7 @@ export default class Home extends React.Component {
           <h2 className={styles.countriesTitle}>
             Countries affected by Covid19
           </h2>
-          {this.state.countries.map(({ CountryCode, Country }) => {
+          {countries.map(({ CountryCode, Country }) => {
             return (
               <div className={styles.countryName} key={CountryCode}>
                 {Country}
