@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import axios from 'axios';
+import Link from 'next/link';
 
 const todaysDate = new Date().toDateString();
 export default class Home extends React.Component {
@@ -74,11 +75,11 @@ export default class Home extends React.Component {
           <h2 className={styles.countriesTitle}>
             Countries affected by Covid19
           </h2>
-          {countries.map(({ CountryCode, Country }) => {
+          {countries.map(({ CountryCode, Country, Slug }) => {
             return (
-              <div className={styles.countryName} key={CountryCode}>
-                {Country}
-              </div>
+              <Link key={CountryCode} href={`/country/${Slug}`}>
+                <a>{Country}</a>
+              </Link>
             );
           })}
         </div>
